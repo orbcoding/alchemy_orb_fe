@@ -1,0 +1,100 @@
+// BREAKPOINTS
+$mq-breakpoints: (
+  // xxs: 360px,
+  xs: 480px,
+  sm: 640px,
+  md: 800px,
+  lg: 960px,
+  xl: 1280px,
+  xxl: 1400px,
+);
+
+// If you want to display the currently active breakpoint in the top
+// right corner of your site during development, add the breakpoints
+// to this list, ordered by width. For example: (mobile, tablet, desktop).
+// $mq-show-breakpoints: (sm, md, lg);
+
+// PADDING
+$base-p: 3.2rem !default;
+$paddings: (
+  dd: $base-p * 4,
+  doh: $base-p * 14 / 4,
+  doq: $base-p * 13 / 4,
+  do: $base-p * 3,
+  dtq: $base-p * 11 / 4,
+  dh: $base-p * 10 / 4,
+  dq: $base-p * 9 / 4,
+  d: $base-p * 2,
+  otq: $base-p * 7 / 4,
+  oh: $base-p * 6 / 4,
+  oq: $base-p * 5 / 4,
+  o: $base-p,
+  tq: $base-p * 3 / 4,
+  gut: $base-p * 2 / 4,
+  h: $base-p * 2 / 4,
+  te: $base-p * 3 / 8,
+  q: $base-p * 1 / 4,
+  e: $base-p * 1 / 8,
+);
+
+:root {
+  --grid-gutter: #{map-get($paddings, gut)};
+}
+
+// FONTSIZES
+$body-fs: 1.6rem;
+// Left default (mobile), right sm and up
+$font-sizes: (
+  // Bases
+  h1: (2.5em, 2.85em),
+  h2: (2.1em, 2.4em),
+  h3: (1.8em, 2em),
+  h4: (1.55em),
+  h5: (1.35em),
+  h6: (1.2em),
+  p: (0.9em, 1em),
+  small: (0.8em, 0.9em),
+  tiny: (0.8em),
+  // Scalers
+  article: (1.7rem, 1.9rem), // Used for scaling up entire divs
+);
+
+$line-height: 1.5;
+$font-offset: calc((#{$line-height} - #{$body-fs}) / 2); // actual height of line?
+
+$border-width: 0.1rem;
+$border-width-lg: 0.2rem;
+// $icon-height: 1.8rem;
+$border-radius: 0.1rem;
+$control-size: 4rem;
+$control-size-sm: 2.2rem;
+$control-size-lg: 4rem;
+$control-size-area: 8rem;
+$control-icon-size: 1.8rem;
+
+// $boxShadow: 0 1px 10px rgba(black, .25);
+// $boxShadowSmall: 0 1px 4px rgba(black, .15);
+// $boxShadowLarge: 0 30px $padding rgba(black, .35);
+
+
+// Z-INDEX - see mixin
+$z-indexes: (
+	alert  						 : 900,
+	modal-popup        : 800,
+	modal-nav          : 750,
+	modal-notice       : 720,
+	modal              : 700,
+	popup              : 500,
+	notice             : 400,
+	nav                : 300,
+  info               : 200,
+  fgfg               : 150,
+  fg                 : 100,
+  bg                 : -1,
+);
+
+$speeds: (
+  slow: 0.3s,
+  default: 0.17s,
+  fast: 0.12s,
+);

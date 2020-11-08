@@ -1,0 +1,21 @@
+#alchemy_elements_window {
+	#overlay_toolbar {
+		.button_with_label {
+			&:first-child {
+				.icon_button {
+					width: auto !important;
+					height: auto !important;
+					margin: 0;
+					font-size: 1.3em;
+				}
+
+				.fa-plus {
+					width: auto;
+					// background: lightgreen;
+					// color: white;
+					padding: 0.2em 0.4em;
+				}
+			}
+		}
+	}
+}

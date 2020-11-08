@@ -1,0 +1,9 @@
+{
+  "name": "alchemy_orb_fe",
+  "version": "0.1.0",
+  "description": "alchemy_orb frontend assets",
+  "main": "alchemy_org/alchemy_orb.js",
+  "repository": "git@github.com:sharetransition/alchemy_orb_fe.git",
+  "author": "Mikael Norlén <mickenorlen@gmail.com>",
+  "license": "MIT"
+}

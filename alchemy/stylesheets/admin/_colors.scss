@@ -1,0 +1,20 @@
+$base: rgb(199, 234, 247);
+body {
+	background-color: lighten($base, 10%) !important;
+}
+
+.element-header {
+		background-color: lighten($base, 10%);
+}
+
+#header, #user_info {
+	background-color: $base;
+}
+
+#toolbar, .toolbar_buttons, .page_status_and_name {
+	background-color: lighten($base, 10%) !important;
+}
+
+#element_area, #overlay_toolbar {
+	background-color: lighten($base, 5%);
+}

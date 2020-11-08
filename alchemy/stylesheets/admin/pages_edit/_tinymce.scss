@@ -1,0 +1,19 @@
+.mce-statusbar {
+	height: 0 !important;
+	border: 0 !important;
+
+	.mce-container-body {
+		// height: 0 !important;
+	}
+
+	.mce-path {
+		display: none;
+	}
+
+
+
+	.mce-resizehandle {
+		top: -15px !important;
+		right: -1px !important;
+	}
+}

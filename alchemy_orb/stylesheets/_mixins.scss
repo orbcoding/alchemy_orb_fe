@@ -1,0 +1,152 @@
+// Commonly used shorts
+@function c($color) {
+	@return var(--color-#{$color});
+}
+
+@function p($p: o) {
+	@return map-get($paddings, $p);
+}
+
+@function z($key) {
+	@return map-get($z-indexes, $key);
+}
+
+@function s($key: default) {
+	@return map-get($speeds, $key);
+}
+
+
+@function bp($bp) {
+	@return map-get($mq-breakpoints, $bp);
+}
+
+@function fs($size: p, $mq: false) {
+	$sizes: map-get($font-sizes, $size);
+	@if $mq == sm and length($sizes) > 1 {
+		@return nth($sizes, 2);
+	}
+	@else {
+		@return nth($sizes, 1);
+	}
+}
+
+@mixin fs-mq($size: p) {
+	$default: fs($size);
+	$sm: fs($size, sm);
+
+	font-size: $default;
+
+	@if $default != $sm {
+		@include mq($from: sm) {
+			font-size: $sm;
+		}
+	}
+}
+
+
+// Less common
+@mixin strip-button() {
+	background: none;
+	border: none;
+	text-align: center;
+	cursor: pointer;
+
+	background-repeat: no-repeat;
+	background-position: center center;
+
+	-webkit-appearance: none;
+	-moz-appearance:none;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+
+
+
+// Spectre
+// Component focus shadow
+@mixin control-shadow($color: primary) {
+  box-shadow: 0 0 0 .2rem rgba(var(--color-#{$color}-rgb), .2);
+}
+
+@mixin card-shadow() {
+	box-shadow: 0 0px 20px rgba(0, 0, 0, 0.06);
+}
+
+@mixin bottom-shadow() {
+	box-shadow: 0 10px 6px -6px #777;
+}
+
+@mixin deep-shadow() {
+	box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12)
+}
+
+// Shadow mixin
+// @mixin shadow-variant($offset) {
+//   box-shadow: 0 $offset ($offset + .05rem) * 2 rgba($dark-color, .3);
+// }
+
+
+// FONT AWESOME
+// https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use
+// Standard solid
+// @mixin fa($content, $colors, $el: before) {
+// 	font-family: 'Font Awesome 5 Free';
+// 	font-weight: 900;
+// 	@if $el == before {
+// 		&:before {
+// 			content: #{'"\\' +$content + '"'};
+// 		}
+// 	} @else if $el == after {
+// 		&:after {
+// 			font-family: 'Font Awesome 5 Free';
+// 			content: #{'"\\' + $content + '"'};
+// 		}
+// 	}
+// }
+// @mixin fab($content, $el) {
+// 	@include fa($content, $el);
+// 	font-weight: 400;
+// }
+
+
+// Color theme helper
+@function hex-to-rgb($hex) {
+  @return red($hex), green($hex), blue($hex);
+}
+
+@mixin set-colors($colorList) {
+	$light: ();
+	$dark: ();
+
+	@each $name, $colors in $colorList {
+		$light: map-merge($light, (#{$name}: nth($colors, 1)));
+		$dark: map-merge($dark, (#{$name}: nth($colors, 2)));
+	}
+
+	:root {
+		@each $name, $color in $light {
+			--color-#{$name}: #{$color};
+		}
+		@each $name, $color in $light {
+			--color-#{$name}-rgb: #{hex-to-rgb($color)};
+		}
+	}
+
+	[data-theme="dark"] {
+		@each $name, $color in $dark {
+			--color-#{$name}: #{$color};
+		}
+		@each $name, $color in $dark {
+			--color-#{$name}-rgb: #{hex-to-rgb($color)};
+		}
+	}
+}

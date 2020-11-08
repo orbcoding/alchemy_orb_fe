@@ -1,0 +1,178 @@
+._mx-auto > *, .mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+._mr-auto > *, .mr-auto {
+	margin-right: auto;
+}
+
+.ml-auto > *, .ml-auto {
+	margin-left: auto;
+}
+
+.mt-0 {
+	margin-top: 0;
+}
+
+.mb-0 {
+	margin-bottom: 0;
+}
+
+.mx-0 {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+// Visibility
+[class^="show-"],
+[class*=" show-"] {
+	display: none !important;
+}
+
+.hide {
+	display: none !important;
+}
+
+
+.invis {
+	visibility: hidden !important;
+	opacity: 0 !important;
+}
+
+@each $size, $px in $mq-breakpoints {
+	@include mq($from: $size) {
+		.hide-#{$size} {
+			display: none !important;
+		}
+
+		.show-#{$size} {
+			display: block !important;
+		}
+	}
+}
+
+// Grid sizing system
+.container {
+	margin: 0 auto;
+	width: 100%;
+	padding: 0 var(--grid-gutter);
+	// max-width: var(--grid-max-width);
+
+	@media screen and (min-width: map-get($mq-breakpoints, sm)) {
+		width: 96%;
+	}
+}
+
+.row {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+
+	// margin-left: 0;
+	// margin-right: 0;
+
+	> * {
+		flex: 1; // auto fill space
+	}
+
+	&.reverse {
+		flex-direction: row-reverse;
+	}
+}
+
+
+// Gutter
+.row {
+	&.gut-x-neg { // Offset inner gutter with negative margins
+		margin-left: calc(-1 * var(--grid-gutter));
+		margin-right: calc(-1 * var(--grid-gutter));
+	}
+
+	@each $size, $px in $mq-breakpoints {
+		@media screen and (min-width: $px) {
+			&.gut-#{$size}-x-neg {
+				margin-left: calc(-1 * var(--grid-gutter));
+				margin-right: calc(-1 * var(--grid-gutter));
+			}
+		}
+	}
+}
+
+._gut > *, .gut {
+	padding-left: var(--grid-gutter);
+	padding-right: var(--grid-gutter);
+	padding-bottom: var(--grid-gutter);
+}
+
+._gut-x > *, .gut-x {
+	padding-left: var(--grid-gutter);
+	padding-right: var(--grid-gutter);
+}
+
+html .gut { // anti-pattern specificity 2
+	&-0 {
+		padding: 0 0 0;
+	}
+
+	&-x-0 {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+@each $size, $px in $mq-breakpoints {
+	@media screen and (min-width: $px) {
+		._gut-#{$size} > *, html .gut-#{$size} {
+			padding: 0 var(--grid-gutter) var(--grid-gutter) var(--grid-gutter);
+		}
+
+		._gut-#{$size}-x > *, html .gut-#{$size}-x {
+			padding-left: var(--grid-gutter);
+			padding-right: var(--grid-gutter);
+		}
+	}
+}
+
+
+// Sizes specificity 2
+._size-self > *, html .size-self {
+	flex: none;
+	width: auto;
+}
+
+@for $i from 1 through 12 {
+	._size-#{$i} > *, html .size-#{$i} {
+		flex: none;
+		width: 100% / 12 * $i;
+	}
+}
+
+// Responsive sizes
+@each $size, $px in $mq-breakpoints {
+	._size-#{$size} > *, html .size-#{$size} {
+		flex: none;
+		width: $px;
+	}
+	@media screen and (min-width: $px) {
+		@for $i from 1 through 12 {
+			._size-#{$size}-#{$i} > *, html .size-#{$size}-#{$i} {
+				flex: none;
+				width: 100% / 12 * $i;
+			}
+		}
+		@each $s, $p in $mq-breakpoints {
+			@if $p <= $px { // Only sizes same or smaller than breakpoint/screen
+				._size-#{$size}-#{$s} > *, html .size-#{$size}-#{$s} {
+					flex: none;
+					width: $p;
+				}
+			}
+		}
+
+		._size-#{$size}-self > *, html .size-#{$size}-self {
+			flex: none;
+			width: auto;
+		}
+	}
+}
